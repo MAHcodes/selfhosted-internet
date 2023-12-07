@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  openbooks:
+    container_name: openbooks
+    image: evanbuss/openbooks:latest
+    restart: no
+    ports:
+      - 80:80
+    volumes:
+      - ./books:/books
+    command: ["--persist", "--name", "anonymous"]
