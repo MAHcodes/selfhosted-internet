@@ -1,0 +1,20 @@
+version: "3"
+
+networks:
+  npm_default:
+    external: true
+
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: no
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - ./configs:/app/data/configs
+      - ./icons:/app/public/icons
+      - ./data:/data
+    networks:
+      - npm_default
+    ports:
+      - 7575:7575

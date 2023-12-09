@@ -1,0 +1,23 @@
+---
+version: "2.1"
+
+networks:
+  npm_default:
+    external: true
+
+services:
+  snapdrop:
+    image: lscr.io/linuxserver/snapdrop:latest
+    container_name: snapdrop
+    restart: no
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Beirut
+    volumes:
+      - ./config:/config
+    networks:
+      - npm_default
+    ports:
+      - 82:80
+      - 442:443
