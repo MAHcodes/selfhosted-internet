@@ -3,6 +3,8 @@ version: "3.5"
 
 networks:
   penpot:
+  npm_default:
+    external: true
 
 volumes:
   penpot_postgres_v15:
@@ -36,6 +38,7 @@ services:
 
   penpot-frontend:
     image: "penpotapp/frontend:latest"
+    container_name: penpot-frontend
     restart: always
     ports:
       - 9001:80
@@ -49,6 +52,7 @@ services:
 
     networks:
       - penpot
+      - npm_default
 
     labels:
       - "traefik.enable=true"
