@@ -1,0 +1,23 @@
+---
+version: "2.1"
+
+networks:
+  npm_default:
+    external: true
+
+services:
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    restart: no
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Beirut
+    volumes:
+      - ./config:/config
+      - ./data:/data
+    networks:
+      - npm_default
+    ports:
+      - 448:443

@@ -1,6 +1,10 @@
 ---
 version: "3"
 
+networks:
+  npm_default:
+    external: true
+
 services:
   syncthing:
     image: syncthing/syncthing
@@ -10,8 +14,11 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - TZ=Asia/Beirut
     volumes:
       - ./syncthing:/var/syncthing
+    networks:
+      - npm_default
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers
