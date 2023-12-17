@@ -1,0 +1,26 @@
+version: "3"
+
+networks:
+  gitea:
+    external: false
+  npm_default:
+    external: true
+
+services:
+  server:
+    image: gitea/gitea:1.21.1
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: no
+    networks:
+      - gitea
+      - npm_default
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 3002:3000
+      - 222:22
