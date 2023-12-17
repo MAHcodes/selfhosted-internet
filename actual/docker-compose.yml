@@ -6,6 +6,6 @@ services:
     container_name: actual
     restart: no
     ports:
-      - "5006:5006"
+      - 5006:5006
     volumes:
       - ./actual-data:/data
