@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    restart: no
+    ports:
+      - 13378:80
+    volumes:
+      - ./audiobooks:/audiobooks
+      - ./podcasts:/podcasts
+      - ./metadata:/metadata
+      - ./config:/config
