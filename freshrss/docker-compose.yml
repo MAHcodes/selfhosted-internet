@@ -1,0 +1,22 @@
+---
+version: "2.1"
+
+networks:
+  npm_default:
+    external: true
+
+services:
+  freshrss:
+    image: lscr.io/linuxserver/freshrss:latest
+    container_name: freshrss
+    restart: no
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Beirut
+    volumes:
+      - ./config:/config
+    networks:
+      - npm_default
+    ports:
+      - 882:80
