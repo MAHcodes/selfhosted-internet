@@ -1,5 +1,6 @@
 *
-!.gitignore
+!./.gitignore
+!*/.gitignore
 !/meme.jpeg
 !*/
 !*/docker-compose.yml
