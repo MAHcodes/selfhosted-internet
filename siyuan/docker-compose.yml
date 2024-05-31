@@ -1,0 +1,12 @@
+services:
+  main:
+    image: b3log/siyuan
+    command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=1000']
+    user: '1000:1000'
+    ports:
+      - 6806:6806
+    volumes:
+      - ./workspace:/siyuan/workspace
+    restart: no
+    environment:
+      - TZ=Asia/Beirut
