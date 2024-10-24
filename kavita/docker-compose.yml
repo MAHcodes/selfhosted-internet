@@ -4,7 +4,7 @@ services:
     container_name: kavita
     restart: no
     volumes:
-      - /media/mhmdali102/KINGSTON/Books:/books
+      - /home/mhmdali102/Documents/Books:/books
       - ./data:/kavita/config
     environment:
       - TZ=Asia/Beirut
