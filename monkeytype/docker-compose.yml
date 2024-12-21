@@ -1,0 +1,6 @@
+services:
+  monkeytype:
+    image: themythologist/monkeytype:frontend-latest
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
