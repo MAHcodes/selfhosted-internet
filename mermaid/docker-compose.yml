@@ -1,0 +1,7 @@
+services:
+  mermaid:
+    container_name: mermaid
+    image: ghcr.io/mermaid-js/mermaid-live-editor
+    restart: no
+    ports:
+      - "8000:8080"

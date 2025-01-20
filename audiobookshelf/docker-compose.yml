@@ -2,13 +2,11 @@ services:
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
     container_name: audiobookshelf
-    restart: no
+    restart: unless-stopped
     ports:
       - 13378:80
     volumes:
-      # - /media/mhmdali102/KINGSTON/Audiobooks:/audiobooks
-      # - /media/mhmdali102/KINGSTON/Podcasts:/podcasts
-      - /home/mhmdali102/Music/Audiobooks:/audiobooks
-      - /home/mhmdali102/Music/Podcasts:/podcasts
+      - /media/mhmdali102/KINGSTON/Audiobooks:/audiobooks
+      - /media/mhmdali102/KINGSTON/Podcasts:/podcasts
       - ./metadata:/metadata
       - ./config:/config
