@@ -24,4 +24,7 @@ services:
       MYSQL_USER: MyWordPressUser
       MYSQL_PASSWORD: Pa$$5w0rD
     volumes:
-      - ./db:/var/lib/mysql
+      - db:/var/lib/mysql
+
+volumes:
+  db:
