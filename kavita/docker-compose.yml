@@ -2,9 +2,9 @@ services:
   kavita:
     image: jvmilazz0/kavita:latest
     container_name: kavita
-    restart: no
+    restart: unless-stopped
     volumes:
-      - /home/mhmdali102/Documents/Books:/books
+      - /home/ali/Documents/Books:/books
       - ./data:/kavita/config
     environment:
       - TZ=Asia/Beirut
