@@ -1,0 +1,72 @@
+services:
+  byparr:
+    container_name: byparr
+    image: ghcr.io/thephaseless/byparr:latest
+    restart: unless-stopped
+    networks:
+      - torrent
+    ports:
+      - "8191:8191"
+
+  prowlarr:
+    container_name: prowlarr
+    image: ghcr.io/hotio/prowlarr
+    depends_on:
+      - byparr
+    ports:
+      - "9696:9696"
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=002
+      - TZ=Asia/Beirut
+      - WEBUI_PORTS=9696/tcp
+    networks:
+      - torrent
+    volumes:
+      - ./prowlarr/config:/config
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Beirut
+      - WEBUI_PORT=8080
+    networks:
+      - torrent
+    volumes:
+      - ./qbittorrent/config:/config
+      - ./downloads:/downloads
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  lidarr:
+    container_name: lidarr
+    image: ghcr.io/hotio/lidarr
+    depends_on:
+      - byparr
+      - prowlarr
+      - qbittorrent
+    ports:
+      - "8686:8686"
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=002
+      - TZ=Asia/Beirut
+      - WEBUI_PORTS=8686/tcp
+    networks:
+      - torrent
+    volumes:
+      - ./lidarr/config:/config
+      - ./data:/data
+      - ./downloads:/downloads
+
+networks:
+  torrent:
+    external: false
