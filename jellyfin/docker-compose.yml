@@ -2,6 +2,9 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
+    restart: "unless-stopped"
+    networks:
+        - jellyfin
     ports:
       - 8096:8096/tcp
       - 7359:7359/udp
@@ -12,4 +15,8 @@ services:
         source: /home/ali/Videos/
         target: /media
         read_only: true
-    restart: "unless-stopped"
+
+networks:
+  jellyfin:
+    name: jellyfin
+    external: true

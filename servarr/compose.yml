@@ -1,0 +1,105 @@
+services:
+  flaresolverr:
+    container_name: flaresolverr
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=info
+      - LOG_FILE=none
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=Asia/Beirut
+    networks:
+      - servarr
+    ports:
+      - "8191:8191"
+    volumes:
+      - ./flaresolverr:/config
+
+  prowlarr:
+    container_name: prowlarr
+    image: ghcr.io/hotio/prowlarr
+    restart: unless-stopped
+    depends_on:
+      - flaresolverr
+    ports:
+      - "9696:9696"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Asia/Beirut
+      - WEBUI_PORTS=9696/tcp
+    networks:
+      - servarr
+    volumes:
+      - ./prowlarr:/config
+
+  qbittorrent:
+    container_name: qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:latest
+    restart: unless-stopped
+    user: "1000:1000"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Beirut
+      - WEBUI_PORT=8080
+    networks:
+      - servarr
+    volumes:
+      - ./qbittorrent:/config
+      - ./data:/data
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+
+  radarr:
+    container_name: radarr
+    image: ghcr.io/hotio/radarr
+    restart: unless-stopped
+    depends_on:
+      - flaresolverr
+      - prowlarr
+      - qbittorrent
+    ports:
+      - "7878:7878"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Asia/Beirut
+      - WEBUI_PORTS=7878/tcp
+    networks:
+      - servarr
+    volumes:
+      - ./radarr:/config
+      - ./data:/data
+
+  lidarr:
+    container_name: lidarr
+    image: ghcr.io/hotio/lidarr
+    restart: unless-stopped
+    depends_on:
+      - flaresolverr
+      - prowlarr
+      - qbittorrent
+    ports:
+      - "8686:8686"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Asia/Beirut
+      - WEBUI_PORTS=8686/tcp
+    networks:
+      - servarr
+    volumes:
+      - ./lidarr:/config
+      - ./data:/data
+
+networks:
+  servarr:
+    name: servarr
+    external: false
