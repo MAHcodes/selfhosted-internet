@@ -10,7 +10,7 @@ services:
       - CAPTCHA_SOLVER=none
       - TZ=Asia/Beirut
     networks:
-      - servarr
+      - media
     ports:
       - "8191:8191"
     volumes:
@@ -31,7 +31,7 @@ services:
       - TZ=Asia/Beirut
       - WEBUI_PORTS=9696/tcp
     networks:
-      - servarr
+      - media
     volumes:
       - ./prowlarr:/config
 
@@ -44,7 +44,7 @@ services:
       - TZ=Asia/Beirut
       - WEBUI_PORT=8080
     networks:
-      - servarr
+      - media
     volumes:
       - ./qbittorrent:/config
       - ./data:/data
@@ -70,7 +70,7 @@ services:
       - TZ=Asia/Beirut
       - WEBUI_PORTS=7878/tcp
     networks:
-      - servarr
+      - media
     volumes:
       - ./radarr:/config
       - ./data:/data
@@ -92,12 +92,11 @@ services:
       - TZ=Asia/Beirut
       - WEBUI_PORTS=8686/tcp
     networks:
-      - servarr
+      - media
     volumes:
       - ./lidarr:/config
       - ./data:/data
 
 networks:
-  servarr:
-    name: servarr
-    external: false
+  media:
+    external: true

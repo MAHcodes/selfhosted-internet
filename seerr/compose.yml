@@ -12,9 +12,8 @@ services:
       - ./config:/app/config
     restart: unless-stopped
     networks:
-        - jellyfin
+        - media
 
 networks:
-  jellyfin:
-    name: jellyfin
+  media:
     external: true
