@@ -16,6 +16,10 @@ services:
         target: /movies
         read_only: true
       - type: bind
+        source: /home/ali/docker/servarr/data/media/tv/
+        target: /tv
+        read_only: true
+      - type: bind
         source: /home/ali/Videos/
         target: /media
         read_only: true

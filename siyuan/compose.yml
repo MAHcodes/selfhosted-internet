@@ -1,12 +1,13 @@
 services:
-  main:
+  siyuan:
     image: b3log/siyuan
+    environment:
+      - TZ=Asia/Beirut
+      - PUID=1000
+      - PGID=1000
     command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=1000']
-    user: '1000:1000'
     ports:
       - 6806:6806
     volumes:
       - ./workspace:/siyuan/workspace
-    restart: no
-    environment:
-      - TZ=Asia/Beirut
+    restart: unless-stopped

@@ -97,6 +97,28 @@ services:
       - ./lidarr:/config
       - ./data:/data
 
+  sonarr:
+    container_name: sonarr
+    image: ghcr.io/hotio/sonarr
+    restart: unless-stopped
+    depends_on:
+      - flaresolverr
+      - prowlarr
+      - qbittorrent
+    ports:
+      - "8989:8989"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Asia/Beirut
+      - WEBUI_PORTS=8989/tcp
+    networks:
+      - media
+    volumes:
+      - ./sonarr:/config
+      - ./data:/data
+
 networks:
   media:
     external: true
