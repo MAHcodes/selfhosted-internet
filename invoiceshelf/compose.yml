@@ -1,0 +1,24 @@
+services:
+  invoiceshelf:
+    image: invoiceshelf/invoiceshelf:latest
+    container_name: invoiceshelf
+    restart: unless-stopped
+    environment:
+      - APP_NAME=InvoiceShelf
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_URL=http://localhost:8090
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/var/www/html/database/database.sqlite
+      - CACHE_STORE=file
+      - SESSION_DRIVER=file
+      - SESSION_LIFETIME=240
+      - SESSION_DOMAIN=localhost
+      - SANCTUM_STATEFUL_DOMAINS=localhost:8090
+    volumes:
+      - invoiceshelf:/var/www/html/storage
+    ports:
+      - 8090:8080
+
+volumes:
+  invoiceshelf:
