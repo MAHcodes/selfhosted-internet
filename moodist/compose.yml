@@ -1,0 +1,9 @@
+name: moodist
+
+services:
+  moodist:
+    image: ghcr.io/remvze/moodist:latest
+    container_name: moodist
+    ports:
+      - 8084:8080
+    restart: unless-stopped
