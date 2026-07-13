@@ -1,0 +1,9 @@
+services:
+  yarr:
+    container_name: yarr
+    image: ghcr.io/nkanaev/yarr:latest
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    ports:
+      - 7070:7070
