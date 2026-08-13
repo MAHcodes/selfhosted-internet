@@ -1,0 +1,11 @@
+services:
+  nextDash:
+    image: ghcr.io/jordibrouwer/nextdash:latest
+    container_name: nextDash
+    ports:
+      - "8180:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PORT=8080
+    restart: unless-stopped
