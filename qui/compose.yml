@@ -1,0 +1,9 @@
+services:
+  qui:
+    container_name: qui
+    image: ghcr.io/autobrr/qui:latest
+    restart: no
+    ports:
+      - 7476:7476
+    volumes:
+      - ./qui:/config

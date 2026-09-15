@@ -1,5 +1,5 @@
 services:
-  qbittorrent:
+  qb:
     container_name: qb
     image: lscr.io/linuxserver/qbittorrent:latest
     environment:
@@ -15,14 +15,3 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: no
-
-  qui:
-    container_name: qui
-    image: ghcr.io/autobrr/qui:latest
-    depends_on:
-      - qb
-    restart: no
-    ports:
-      - 7476:7476
-    volumes:
-      - ./qui:/config
