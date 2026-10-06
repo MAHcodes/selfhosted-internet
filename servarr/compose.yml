@@ -119,6 +119,20 @@ services:
       - ./sonarr:/config
       - ./data:/data
 
+  aurral:
+    image: ghcr.io/lklynet/aurral:latest
+    restart: unless-stopped
+    ports:
+      - "3182:3001"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    networks:
+      - media
+    volumes:
+      - ./data/media/music/:/data
+      - ./aurral:/config
+
 networks:
   media:
     external: true
