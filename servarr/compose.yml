@@ -75,6 +75,23 @@ services:
       - ./radarr:/config
       - ./data:/data
 
+  bazarr:
+    container_name: bazarr
+    image: lscr.io/linuxserver/bazarr:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Beirut
+    volumes:
+      - ./bazarr:/config
+      - ./data/media/movies/:/movies
+      - ./data/media/tv/:/tv
+    ports:
+      - 6767:6767
+    networks:
+      - media
+
   lidarr:
     container_name: lidarr
     image: ghcr.io/hotio/lidarr
